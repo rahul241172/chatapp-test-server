@@ -2,6 +2,7 @@ const express=require("express")
 const app=express()
 const socketio=require("socket.io")
 const http=require("http")
+const cors=require("cors")
 const { userJoin, getRoomUsers, getCurrentUser, userLeave } = require("./utils/users")
 const formateMessage = require("./utils/messages")
 
@@ -10,12 +11,12 @@ const httpserver=http.createServer(app)
 const io=socketio(httpserver)
 
 const boatName = "ChitChat";
-
+app.use(cors())
 app.use(express.static(__dirname + '/'))
 
 app.get('/', (req, res) => {
-   //res.send("Welcome")
-     res.sendFile(__dirname + 'joinroom.html')
+    res.sendFile(__dirname + 'joinroom.html')
+   res.send("Welcome")
 })
 
 io.on('connection', (socket) => {
