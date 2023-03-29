@@ -16,6 +16,7 @@ app.use(express.static(__dirname + '/'))
 
 app.get('/', (req, res) => {
     // res.sendFile(__dirname + 'joinroom.html')
+    console.log("running")
    res.send("Welcome")
 })
 var user=null
