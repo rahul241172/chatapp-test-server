@@ -11,14 +11,14 @@ const httpserver=http.createServer(app)
 const io=socketio(httpserver)
 
 const boatName = "ChitChat";
-app.use(cors())
+app.use(cors({origin:"*"}))
 app.use(express.static(__dirname + '/'))
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + 'joinroom.html')
+    // res.sendFile(__dirname + 'joinroom.html')
    res.send("Welcome")
 })
-
+var user=null
 io.on('connection', (socket) => {
     console.log('Connected...')
     socket.on('message', (msg) => {
@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     socket.on("joinRoom", ({ username, room }) => {
 
 
-        const user = userJoin(socket.id, username, room)
+         user = userJoin(socket.id, username, room)
     
         socket.join(user.room);
 
